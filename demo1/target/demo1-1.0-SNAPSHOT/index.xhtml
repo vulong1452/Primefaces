@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Home Page</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:graphicImage name="download.png" library="images"/>
+                <h3>Khao sat</h3>
+            </h:panelGrid>
+            <h:panelGrid columns="3">
+                <h:outputLabel value="Ho ten"/>
+                <h:inputText id="txtHoTen"
+                             value="#{serveyBean.name}"
+                             required="true"
+                             requiredMessage="Ho ten bat buoc nhap"/>
+                <h:message for="txtHoten" style="color: red;"/>
+                
+                <h:outputLabel value="Nam Sinh"/>
+                <h:inputText id="txtNamSinh" 
+                             value="#{serveyBean.year}"
+                             validatorMessage="Nam sinh khong hop le.">
+                    <f:validateRegex pattern="[0-9]+"/>
+                </h:inputText>
+                <h:message for="txtNamSinh" style="color: red;"/>
+            </h:panelGrid>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Gioi Tinh"/>
+                <h:selectOneRadio id="rdoGioiTinh" value="#{serveyBean.gender}">
+                    <f:selectItem itemLabel="Nam" itemValue="0"></f:selectItem>
+                    <f:selectItem itemLabel="Nu" itemValue="1"></f:selectItem>
+                </h:selectOneRadio>      
+            </h:panelGrid>
+            <h:panelGrid>
+                <h:outputLabel value="Ngon ngu yeu thich"/>
+                <h:selectManyCheckbox id="chkNgonNgu" value="#{serveyBean.languages}">
+                    <f:selectItem itemValue="Java"></f:selectItem>
+                    <f:selectItem itemValue="Python"></f:selectItem>
+                    <f:selectItem itemValue="C#"></f:selectItem>
+                    <f:selectItem itemValue="Ruby"></f:selectItem>
+                </h:selectManyCheckbox>                            
+            </h:panelGrid>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Khac"/>
+                <h:inputText id="txtNgonNguKhac" value="#{serveyBean.other}">
+                    <f:validator validatorId="LanguageValidator"/>
+                </h:inputText>                       
+                <h:message for="txtNgonNguKhac" style="color: red;"/>
+            </h:panelGrid>
+            <h:panelGrid>
+                <h:outputLabel value="Tai sao thich"/>
+                <h:inputTextarea id="txtTaiSao" cols="50" rows="4" 
+                                 value="#{serveyBean.reason}"
+                                 validatorMessage="Ly do khong qua 10 ki tu.">
+                    <f:validateLength maximum="10"/>
+                </h:inputTextarea>                       
+                <h:message for="txtTaiSao" style="color: red;"/>
+            </h:panelGrid>
+            <h:panelGrid>
+                <h:commandButton value="Gui"
+                                 style="background-color:blue;color:white"/>                     
+            </h:panelGrid>
+            <h:outputText escape="false" value="#{serveyBean.response}"/>
+        </h:form>
+        
+    </h:body>
+</html>
+
